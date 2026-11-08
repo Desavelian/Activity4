@@ -1,1 +1,32 @@
+name: GitHub Projects Automation
 
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  move-issue-to-done:
+    if: github.event.pull_request.merged == true
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Move Issue to Done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "PR merged."
+          echo "Move linked issues to Done."
+
+          # Example placeholder for GitHub Project API call.
+          # Replace with your project/node IDs.
+
+          curl -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Content-Type: application/json" \
+            https://api.github.com/graphql \
+            -d '{}'
